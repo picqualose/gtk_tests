@@ -41,13 +41,13 @@ int main (int argc, char *argv[])
         //Fonction appelee dans toutes appli GTK --> evalue parametre en ligne de commande et retournes a l'appli (param de base)
         gtk_init (&argc, &argv);
 
-        //Permet de quitter la fenetre via gestionnaire fenetre --> lie avec fonction de rappel 
-        //destroy 
-           gtk_signal_connect (GTK_OBJECT (window), "destroy", GTK_SIGNAL_FUNC (destroy), NULL);
-
-
         //Creation de la fenetre 
         window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+        
+        //Permet de quitter la fenetre via gestionnaire fenetre --> lie avec fonction de rappel 
+        //destroy 
+        gtk_signal_connect (GTK_OBJECT (window), "destroy", GTK_SIGNAL_FUNC (destroy), NULL);
+        
         //Affichage de la fenetre 
         gtk_widget_show (window);
         //Definition de la largeur de la bordure du container 

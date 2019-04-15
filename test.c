@@ -36,6 +36,7 @@ int main (int argc, char *argv[])
         //Declaration d'un Widget, ici une fenetre puis un bouton
         GtkWidget *window;
         GtkWidget *button;
+        GtkWidget *box1; /* --> BOUATE */
 
     //TRUCS DE BASES    
         //Fonction appelee dans toutes appli GTK --> evalue parametre en ligne de commande et retournes a l'appli (param de base)
@@ -53,6 +54,9 @@ int main (int argc, char *argv[])
         //Definition de la largeur de la bordure du container 
         gtk_container_border_width (GTK_CONTAINER (window), 10);
     
+        box1 = gtk_hbox_new(FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (window), box1);
+
         //Creation d'un nouveau bouton 
         button = gtk_button_new_with_label ("Je suis un bouton");
         
@@ -67,9 +71,14 @@ int main (int argc, char *argv[])
 
 
         //On met le bouton dans la fenetre 
-        gtk_container_add (GTK_CONTAINER (window), button);
+       // gtk_container_add (GTK_CONTAINER (window), button);
+        
+        //Et si on le mettait dans une boite ? 
+        gtk_box_pack_start(GTK_BOX(box1), button, TRUE, TRUE, 0);
+
 
         gtk_widget_show (button);
+        gtk_widget_show (box1);
         gtk_widget_show (window);
 
         // On affiche d'abord le "window" pour viter de voir d'abord la fenetre puis le bouton mais bien les deux

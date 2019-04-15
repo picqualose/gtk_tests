@@ -43,8 +43,7 @@ int main (int argc, char *argv[])
 
         //Permet de quitter la fenetre via gestionnaire fenetre --> lie avec fonction de rappel 
         //destroy 
-           gtk_signal_connect (GTK_OBJECT (window), "destroy",
-                        GTK_SIGNAL_FUNC (destroy), NULL);
+           gtk_signal_connect (GTK_OBJECT (window), "destroy", GTK_SIGNAL_FUNC (destroy), NULL);
 
 
         //Creation de la fenetre 

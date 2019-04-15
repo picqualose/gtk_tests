@@ -9,8 +9,13 @@
 // Quand il est appele, affiche le message note dans le terminal 
 void coucou (GtkWidget *widget, gpointer data)
 {
-    g_print ("Et quand tu cliques j'apparais :D \n");
+    g_print ("Et quand tu cliques j'apparais :D et ferme touuut \n");
 
+}
+
+void msg2 (GtkWidget *widget, gpointer data)
+{
+    g_print ("Moi j'affiche juste ca en boucle \n");
 }
 
 // Indique a GTK quoi faire quand le signal delete arrive (fermer la fenetre via IG.
@@ -36,6 +41,7 @@ int main (int argc, char *argv[])
         //Declaration d'un Widget, ici une fenetre puis un bouton
         GtkWidget *window;
         GtkWidget *button;
+        GtkWidget *button2;
         GtkWidget *box1; /* --> BOUATE */
 
     //TRUCS DE BASES    
@@ -44,7 +50,12 @@ int main (int argc, char *argv[])
 
         //Creation de la fenetre 
         window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        
+      
+        //Donne une titre a la fenetre ouverte gtk_box_pack_start(GTK_BOX(box1), button, TRUE, TRUE, 0);
+
+
+        gtk_window_set_title (GTK_WINDOW (window), "BOUTOOOOONS");
+
         //Permet de quitter la fenetre via gestionnaire fenetre --> lie avec fonction de rappel 
         //destroy 
         gtk_signal_connect (GTK_OBJECT (window), "destroy", GTK_SIGNAL_FUNC (destroy), NULL);
@@ -59,10 +70,13 @@ int main (int argc, char *argv[])
 
         //Creation d'un nouveau bouton 
         button = gtk_button_new_with_label ("Je suis un bouton");
-        
+        button2 = gtk_button_new_with_label ("Et moi j'en suis un autre");
+
         //Le bouton appelle la fonction "coucou" si on clique dessus
         gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC(coucou), NULL);
-        
+        gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC(msg2), NULL);
+
+
         //On peut aussi lui dire d'appeler une autre fonctions en meme temps, 
         //ici fermer la fenetre en plus
         gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
@@ -75,9 +89,12 @@ int main (int argc, char *argv[])
         
         //Et si on le mettait dans une boite ? 
         gtk_box_pack_start(GTK_BOX(box1), button, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(box1), button2, TRUE, TRUE, 0);
+
 
 
         gtk_widget_show (button);
+        gtk_widget_show (button2);
         gtk_widget_show (box1);
         gtk_widget_show (window);
 

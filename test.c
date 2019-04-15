@@ -42,8 +42,8 @@ int main (int argc, char *argv[])
         GtkWidget *window;
         GtkWidget *button;
         GtkWidget *button2;
+        GtkWidget *buttonquit;
         GtkWidget *box1; /* --> BOUATE */
-
     //TRUCS DE BASES    
         //Fonction appelee dans toutes appli GTK --> evalue parametre en ligne de commande et retournes a l'appli (param de base)
         gtk_init (&argc, &argv);
@@ -65,23 +65,25 @@ int main (int argc, char *argv[])
         //Definition de la largeur de la bordure du container 
         gtk_container_border_width (GTK_CONTAINER (window), 10);
     
-        box1 = gtk_hbox_new(FALSE, 0);
+        box1 = gtk_hbox_new(FALSE, 0);         
+
+
         gtk_container_add (GTK_CONTAINER (window), box1);
+
 
         //Creation d'un nouveau bouton 
         button = gtk_button_new_with_label ("Je suis un bouton");
         button2 = gtk_button_new_with_label ("Et moi j'en suis un autre");
+        buttonquit = gtk_button_new_with_label ("QUITTER");
 
         //Le bouton appelle la fonction "coucou" si on clique dessus
         gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC(coucou), NULL);
         gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC(msg2), NULL);
-
+        gtk_signal_connect (GTK_OBJECT (buttonquit), "clicked", GTK_SIGNAL_FUNC(destroy), NULL);
 
         //On peut aussi lui dire d'appeler une autre fonctions en meme temps, 
         //ici fermer la fenetre en plus
-        gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
-                               GTK_SIGNAL_FUNC (gtk_widget_destroy),
-                               GTK_OBJECT (window));
+        gtk_signal_connect_object (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), GTK_OBJECT (window));
 
 
         //On met le bouton dans la fenetre 
@@ -90,15 +92,17 @@ int main (int argc, char *argv[])
         //Et si on le mettait dans une boite ? 
         gtk_box_pack_start(GTK_BOX(box1), button, TRUE, TRUE, 0);
         gtk_box_pack_start(GTK_BOX(box1), button2, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(box1), buttonquit, TRUE, TRUE, 0);
 
 
 
         gtk_widget_show (button);
         gtk_widget_show (button2);
+        gtk_widget_show (buttonquit);
         gtk_widget_show (box1);
         gtk_widget_show (window);
 
-        // On affiche d'abord le "window" pour viter de voir d'abord la fenetre puis le bouton mais bien les deux
+        // On affiche d'abord le "window" pour eviter de voir d'abord la fenetre puis le bouton mais bien les deux
         // en meme temps 
 
         gtk_main ();

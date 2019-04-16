@@ -8,6 +8,9 @@ test_gtk: test_de_base.o
 %.o: %.c
 	$(CC) -c $^ $(CFLAGS)
 
+all: test_gtk
+
+
 .PHONY: clean
 clean:
 	rm -f *.o 

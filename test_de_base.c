@@ -42,8 +42,11 @@ int main (int argc, char *argv[])
         GtkWidget *window;
         GtkWidget *button;
         GtkWidget *button2;
+        GtkWidget *button10;
+        GtkWidget *button11;
         GtkWidget *buttonquit;
         GtkWidget *box1; /* --> BOUATE */
+        GtkWidget *box2; /* --> BOUATE */
 
        
     //TRUCS DE BASES    
@@ -68,6 +71,7 @@ int main (int argc, char *argv[])
         gtk_container_border_width (GTK_CONTAINER (window), 10);
     
         box1 = gtk_vbox_new(FALSE, 0);         
+        box2 = gtk_hbox_new(FALSE, 0);         
 
 
         gtk_container_add (GTK_CONTAINER (window), box1);
@@ -76,6 +80,8 @@ int main (int argc, char *argv[])
         //Creation d'un nouveau bouton 
         button = gtk_button_new_with_label ("Je suis un bouton");
         button2 = gtk_button_new_with_label ("Et moi j'en suis un autre");
+        button10 = gtk_button_new_with_label ("B10");
+        button11 = gtk_toggle_button_new_with_label ("B11");
         buttonquit = gtk_button_new_with_label ("QUITTER");
 
         //Le bouton appelle la fonction "coucou" si on clique dessus
@@ -95,13 +101,19 @@ int main (int argc, char *argv[])
         gtk_box_pack_start(GTK_BOX(box1), button, TRUE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(box1), button2, TRUE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(box1), buttonquit, FALSE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(box1), box2, FALSE, TRUE, 0);
 
 
+        gtk_box_pack_start(GTK_BOX(box2), button11, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(box2), button10, TRUE, TRUE, 0);
 
         gtk_widget_show (button);
         gtk_widget_show (button2);
+        gtk_widget_show (button10);
+        gtk_widget_show (button11);
         gtk_widget_show (buttonquit);
         gtk_widget_show (box1);
+        gtk_widget_show (box2);
         gtk_widget_show (window);
 
         // On affiche d'abord le "window" pour eviter de voir d'abord la fenetre puis le bouton mais bien les deux
